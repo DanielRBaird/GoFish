@@ -32,8 +32,17 @@ namespace GoFish
 
         public void Shuffle()
         {
-            Random rnd = new();
-            Cards = Cards.OrderBy(c => rnd.Next()).ToList();
+            Random random = new();
+
+            int n = Cards.Count;
+            while (n > 1)
+            {
+                n--;
+                int swap = random.Next(n + 1);
+                Card value = Cards[swap];
+                Cards[swap] = Cards[n];
+                Cards[n] = value;
+            }
         }
 
         private static IEnumerable<Card> FullCardSuit(Suit suit)
